@@ -326,7 +326,7 @@ class ModelToDocumentOperator(ToDocumentOperator[models.Model]):
         embedding_vectors = embedding_backend.embed(chunks)
         for chunk, embedding in zip(chunks, embedding_vectors, strict=False):
             yield await Document.objects.acreate(
-                object_keys=[str(key) for key in self._keys_for_instance(object)],
+                object_keys=self._keys_for_instance(object),
                 vector=embedding,
                 content=chunk,
             )
@@ -651,7 +651,7 @@ def build_vector_index_base_for_storage_provider(
 ):
     """Build a VectorIndex base class for a given storage provider alias.
 
-    e.g. If WAGATAIL_VECTOR_INDEX_STORAGE_PROVIDERS includes a provider with alias "default" referencing the PgvectorStorageProvider,
+    e.g. If WAGTAIL_VECTOR_INDEX_STORAGE_PROVIDERS includes a provider with alias "default" referencing the PgvectorStorageProvider,
     this function will return a class that is a subclass of PgvectorIndexMixin and VectorIndex.
     """
 
