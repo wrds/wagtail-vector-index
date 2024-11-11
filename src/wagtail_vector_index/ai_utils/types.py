@@ -49,8 +49,9 @@ class AIResponse:
     `choices` is a list of strings representing the choices returned by the backend.
     """
 
-    def __init__(self, choices: list[str]) -> None:
+    def __init__(self, choices: list[str], usage: list[str]) -> None:
         self.choices = choices
+        self.usage = usage
 
 
 class TextSplitterProtocol(Protocol):

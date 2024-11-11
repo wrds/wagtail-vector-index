@@ -43,7 +43,8 @@ def build_ai_response(response):
         return LiteLLMStreamingAIResponse(response)
 
     return AIResponse(
-        choices=[choice["message"]["content"] for choice in response.choices]
+        choices=[choice["message"]["content"] for choice in response.choices],
+        usage=[usage for usage in response.usage],
     )
 
 

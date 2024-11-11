@@ -101,7 +101,7 @@ class QueryResponse:
     including a response string and a list of sources that were used to generate the response
     """
 
-    response: str
+    response: Iterable[object]
     sources: Iterable[object]
 
 
@@ -152,7 +152,7 @@ class VectorIndex(Generic[ConfigClass]):
         ]
         chat_backend = get_chat_backend(chat_backend_alias)
         response = chat_backend.chat(messages=messages)
-        return QueryResponse(response=response.choices[0], sources=sources)
+        return QueryResponse(response=[response], sources=sources)
 
     def find_similar(
         self, object, *, include_self: bool = False, limit: int = 5
